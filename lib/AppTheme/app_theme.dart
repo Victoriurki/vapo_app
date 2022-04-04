@@ -10,6 +10,12 @@ class AppTheme extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+appBarTheme: AppBarTheme(
+backgroundColor: AppColors.appbarcolor
+
+ ),
+ 
+
           textTheme: TextTheme(
               headline1: AppFont.titleapp,
               headline2: AppFont.subtitleapp,
