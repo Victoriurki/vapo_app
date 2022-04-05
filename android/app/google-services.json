@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "276982026168",
+    "project_id": "vapoapp",
+    "storage_bucket": "vapoapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276982026168:android:dbf8a3e57c78548bfac94d",
+        "android_client_info": {
+          "package_name": "com.snow.vapo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276982026168-ebrq65d8qrvcfsjs8ap70so7u13a9oon.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApZueYN0R56Y1TDaEmNpeFFFmDBCUJGXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276982026168-ebrq65d8qrvcfsjs8ap70so7u13a9oon.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
