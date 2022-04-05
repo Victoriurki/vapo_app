@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.3.1
   firebase_core: ^1.14.0
+  firebase_auth: ^3.3.12
+  google_sign_in: ^5.2.4
+  font_awesome_flutter: ^10.1.0
   #State Manegement
 provider: ^6.0.2
 #Google Icon
@@ -72,6 +75,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets: 
+    - images/man-gesturing-no-light-skin-tone-icon-noto-emoji-people-86321.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
