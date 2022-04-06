@@ -5,10 +5,17 @@ import 'package:vapo_app/AppFont/fonts_app.dart';
 
 class AppTheme {
   static ThemeData theme = ThemeData(
-      appBarTheme: AppBarTheme(backgroundColor: AppColors.appbarcolor),
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.appbarcolor,
+      
+      
+      
+      ),
       textTheme: TextTheme(
           headline1: AppFont.titleapp,
           headline2: AppFont.subtitleapp,
           headline3: AppFont.vapo),
       primaryColor: AppColors.backgroundcolors);
+
+
+    
 }
