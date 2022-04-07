@@ -10,35 +10,35 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [AppColors.gradientcolorA, AppColors.gradientcolorB])),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            "images/man-gesturing-no-light-skin-tone-icon-noto-emoji-people-86321.png"))),
-                height: 189,
-                width: 195,
-              ),
-              Align(
-                alignment: Alignment.center,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [AppColors.gradientcolorA, AppColors.gradientcolorB])),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                          "images/man-gesturing-no-light-skin-tone-icon-noto-emoji-people-86321.png"))),
+              height: 400,
+              width: 500,
+              child: Align(
+                alignment: Alignment.bottomCenter,
                 child: Text(
                   "Vapo",
                   style: AppFont.vapo,
                 ),
               ),
-              const LoginButton()
-            ],
-          ),
-        ));
+            ),
+            const LoginButton(),
+          ],
+        ),
+      ),
+    );
   }
 }
