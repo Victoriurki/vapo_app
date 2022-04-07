@@ -5,7 +5,7 @@ class AppFont {
   static TextStyle vapo =
       GoogleFonts.permanentMarker(fontSize: 128, color: Colors.white);
       static TextStyle vapo2 =
-      GoogleFonts.permanentMarker(fontSize: 10, color: Colors.white);
+      GoogleFonts.permanentMarker(fontSize: 15, color: Colors.white);
   static TextStyle titleapp = GoogleFonts.concertOne();
   static TextStyle subtitleapp = GoogleFonts.robotoMono();
 }

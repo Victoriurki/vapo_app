@@ -17,30 +17,39 @@ class _EventosState extends State<Eventos> {
       appBar: AppBar(
         title: const Text('Todos os Eventos'),
       ),
-      body: StreamBuilder<List<ListEventos>>(
+      body: StreamBuilder<List<Event>>(
         stream: readUser(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final eventos = snapshot.data!;
-
             return ListView(
-              children: [eventos.map((BuildUser).toList())],
+              children: eventos.map((event) => buildUser(event)).toList(),
             );
           }
+          return const CircularProgressIndicator();
         },
       ),
     );
   }
 
-  Widget buildUser(ListEventos listEventos) => ListTile(
-        leading: Text(ListEventos.nome),
-        
+  Widget buildUser(Event event) => Card(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              leading: const Text('Imagem'),
+              title: Text(event.nome!),
+              subtitle: Text(event.data!),
+            ),
+            Row(
+              children: [Text(event.local!)],
+            )
+          ],
+        ),
       );
 
-  Stream<List<ListEventos>> readUser() => FirebaseFirestore.instance
+  Stream<List<Event>> readUser() => FirebaseFirestore.instance
       .collection('eventos')
       .snapshots()
-      .map((snapshot) => snapshot.docs
-          .map((doc) => ListEventos.fromJson(doc.data()))
-          .toList());
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => Event.fromJson(doc.data())).toList());
 }
