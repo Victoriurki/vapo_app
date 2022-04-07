@@ -5,7 +5,7 @@ import 'package:vapo_app/Login%20Feature/gg_signin_controller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginButton extends StatelessWidget {
-  const LoginButton({ Key? key }) : super(key: key);
+  const LoginButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +33,12 @@ class LoginButton extends StatelessWidget {
               });
         }
         if (result == true) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const HomePage()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyHomePage(),
+            ),
+          );
         }
       },
     );
