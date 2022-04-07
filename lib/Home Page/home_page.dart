@@ -1,11 +1,20 @@
 import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vapo_app/Firebase/eventos.dart';
+import 'package:vapo_app/Firebase/list_eventos.dart';
+import 'package:vapo_app/appbars/first_bar.dart';
+
+import '../Login Feature/logout_button.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -108,19 +117,11 @@ class MyHomePageState extends State<MyHomePage> {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home Page"),
-        elevation: 0.0,
-        backgroundColor: AppColors.appbarcolor,
-        actions: <Widget>[
-          IconButton(
-              icon: const Icon(
-                Icons.shopping_cart,
-                color: Colors.black,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: const FirstBar(),
+      floatingActionButton: FloatingActionButton(onPressed: (() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Eventos()));
+      })),
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
@@ -214,6 +215,7 @@ class MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+   
     );
   }
 }
