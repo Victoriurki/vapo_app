@@ -1,44 +1,15 @@
-import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:vapo_app/Firebase/eventos.dart';
-import 'package:vapo_app/Firebase/list_eventos.dart';
 import 'package:vapo_app/appbars/first_bar.dart';
 
-import '../Login Feature/logout_button.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HomePage',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(),
-    );
-  }
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  
-
-  @override
-  MyHomePageState createState() => MyHomePageState();  
-}
-
-class MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   List<String> items = [
     "Item 1",
     "Item 2",
@@ -53,7 +24,7 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
-    final _height = MediaQuery.of(context).size.height*0.4;
+    final _height = MediaQuery.of(context).size.height * 0.4;
 
     final headerList = ListView.builder(
       itemBuilder: (context, index) {
@@ -78,8 +49,7 @@ class MyHomePageState extends State<MyHomePage> {
                       blurRadius: 15.0)
                 ],
                 image: const DecorationImage(
-                  image: ExactAssetImage(
-                      'images/fillet.jpeg'),
+                  image: ExactAssetImage('images/fillet.jpeg'),
                   fit: BoxFit.fitHeight,
                 ),
               ),
@@ -141,7 +111,7 @@ class MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(color: Colors.white70),
                       )),
                 ),
-                SizedBox(height:_height, width: _width, child: headerList),
+                SizedBox(height: _height, width: _width, child: headerList),
                 Expanded(
                   child: ListView.builder(
                     itemBuilder: (context, index) {
@@ -215,7 +185,6 @@ class MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-   
     );
   }
 }
