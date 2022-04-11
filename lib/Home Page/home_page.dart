@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vapo_app/Firebase/eventos.dart';
+import 'package:vapo_app/InfoPage/infopage.dart';
 import 'package:vapo_app/appbars/first_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -60,21 +61,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                        decoration: const BoxDecoration(
-                            color: Color(0xFF273A48),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10.0),
-                                bottomRight: Radius.circular(10.0))),
-                        height: 30.0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
-                            Text(
-                              'Olá',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        )),
+                      decoration: const BoxDecoration(
+                          color: Color(0xFF273A48),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0))),
+                      height: 30.0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const <Widget>[
+                          Text(
+                            'Olá',
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -90,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: const FirstBar(),
       floatingActionButton: FloatingActionButton(onPressed: (() {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Eventos()));
+            context, MaterialPageRoute(builder: (context) => const InfoPage()));
       })),
       backgroundColor: Colors.white,
       body: Stack(
