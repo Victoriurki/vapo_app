@@ -1,10 +1,14 @@
 import 'dart:async';
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:vapo_app/AppFont/fonts_app.dart';
 import 'package:vapo_app/Firebase/eventos.dart';
+import 'package:vapo_app/Save%20Events/save_events.dart';
+import 'package:vapo_app/Search%20Page/search_page.dart';
 import 'package:vapo_app/appbars/first_bar.dart';
 import '../Firebase/list_eventos.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
@@ -45,18 +49,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(4, 4),
-                            blurRadius: 4)
-                      ],
-                      image: const DecorationImage(
-                        image: NetworkImage(),
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(4, 4),
+                              blurRadius: 4)
+                        ],
+                        image: DecorationImage(
+                            image: NetworkImage(snapshot.data![index].image!),
+                            fit: BoxFit.fill)),
                     //                                    height: 200.0,
                     width: 300.0,
                     child: Stack(
@@ -92,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                     height: 10,
                                   ),
                                   Row(
-                                    
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       const Icon(
@@ -192,9 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(12.0)),
-                                            image: const DecorationImage(
-                                              image: ExactAssetImage(
-                                                'images/bailedamentira.jpeg',
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                snapshot.data![index].image!,
                                               ),
                                               fit: BoxFit.cover,
                                             )),
@@ -258,7 +259,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ],
                                         ),
                                       ),
-                                      const Icon(Icons.save)
+                                      const Icon(Icons.bookmark_border)
                                     ],
                                   ),
                                   const Divider(),

@@ -11,6 +11,7 @@ class Event {
   String? horario;
   String? instagram;
   String? image;
+  String? valor;
 
   Event({
     this.id,
@@ -21,6 +22,7 @@ class Event {
     this.horario,
     this.instagram,
     this.image,
+    this.valor,
   });
 
   Map<String, dynamic> tojson() => {
@@ -32,6 +34,7 @@ class Event {
         'horario':horario,
         'instagram':instagram,
         'image':image,
+        'valor':valor,
       };
 
   static Event fromJson(Map<String, dynamic> json) => Event(
@@ -43,5 +46,6 @@ class Event {
         horario: json['horario'],
         instagram: json['instagram'],
         image: json['image'],
+        valor: json['valor'],
       );
 }
