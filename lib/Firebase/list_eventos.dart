@@ -10,6 +10,9 @@ class Event {
   String? endereco;
   String? horario;
   String? instagram;
+
+  String? image;
+
   String? valor;
 
   Event({
@@ -20,6 +23,7 @@ class Event {
     this.endereco,
     this.horario,
     this.instagram,
+    this.image,
     this.valor,
   });
 
@@ -31,7 +35,10 @@ class Event {
         'endereco': endereco,
         'horario': horario,
         'instagram': instagram,
-        'price': valor,
+        'price': valor,      
+        'image':image,
+        'valor':valor,
+
       };
 
   static Event fromJson(Map<String, dynamic> json) => Event(
@@ -42,6 +49,7 @@ class Event {
         endereco: json['endereco'],
         horario: json['horario'],
         instagram: json['instagram'],
+        image: json['image'],
         valor: json['valor'],
       );
 }
