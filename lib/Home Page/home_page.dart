@@ -171,6 +171,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: ListView.builder(
                           itemBuilder: (context, index) {
                             return ListTile(
+                              onTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => InfoPage(
+                                          event: snapshot.data![index]))),
                               title: Column(
                                 children: <Widget>[
                                   Row(

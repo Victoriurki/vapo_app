@@ -10,9 +10,7 @@ class Event {
   String? endereco;
   String? horario;
   String? instagram;
-
   String? image;
-
   String? valor;
 
   Event({
