@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vapo_app/Home%20Page/home_page.dart';
 import 'package:vapo_app/Save%20Events/save_events.dart';
 import 'package:vapo_app/Search%20Page/search_page.dart';
-
 import '../AppColors/colors_app.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,14 +14,14 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int selectedIndex = 0;
   PageController pageController = PageController();
-  
-void onTapped(int index){
-setState(() {
-  selectedIndex = index;  
-});
-pageController.jumpToPage(index);
 
-}
+  void onTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+    pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 1000), curve: Curves.easeOut);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +35,26 @@ pageController.jumpToPage(index);
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.appbarcolor,
         type: BottomNavigationBarType.shifting,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        
         currentIndex: selectedIndex,
-        onTap:onTapped,
-        items:const <BottomNavigationBarItem> [
+        onTap: onTapped,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon:  Icon(Icons.home),
+              icon:  Icon(Icons.home, color: AppColors.gradientcolorA,),
               label: '',
-              backgroundColor: Colors.black),
+              backgroundColor: AppColors.appbarcolor),
           BottomNavigationBarItem(
-              icon:  Icon(Icons.search),
+              icon:  Icon(Icons.search, color: AppColors.gradientcolorA,),
               label: '',
-              backgroundColor: Colors.red),
-           BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark),
+              backgroundColor: AppColors.appbarcolor),
+          BottomNavigationBarItem(
+              icon:  Icon(Icons.bookmark,color: AppColors.gradientcolorA),
               label: '',
-              backgroundColor: Colors.blue)
+              backgroundColor: AppColors.appbarcolor),
         ],
       ),
     );
