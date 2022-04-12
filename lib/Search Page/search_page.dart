@@ -1,19 +1,10 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vapo_app/Firebase/list_eventos.dart';
-import 'package:vapo_app/appbars/first_bar.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
-Stream<List<Event>> readUser() => FirebaseFirestore.instance
-      .collection('eventos')
-      .snapshots()
-      .map((snapshot) =>
-          snapshot.docs.map((doc) => Event.fromJson(doc.data())).toList());
-          
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +26,16 @@ Stream<List<Event>> readUser() => FirebaseFirestore.instance
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    'apple',
-    'lalala',
-    'banana',
-    'orange',
-    'grape',
-    'peach',
-  ];
+  List<Event> events = <Event>[];
+
+  Future<List<Event>> readUser() async {
+    final documents =
+        await FirebaseFirestore.instance.collection("eventos").get();
+    final eventList =
+        documents.docs.map((doc) => Event.fromJson(doc.data())).toList();
+    events = eventList;
+    return eventList;
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -58,6 +51,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
+    readUser();
     return IconButton(
         onPressed: () {
           close(context, null);
@@ -69,9 +63,9 @@ class CustomSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
 
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
+    for (var event in events) {
+      if (event.nome!.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(event.nome!);
       }
     }
     return ListView.builder(
@@ -79,6 +73,9 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
+          onTap: () {
+            
+          },
           title: Text(result),
         );
       },
@@ -88,9 +85,9 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
+    for (var event in events) {
+      if (event.nome!.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(event.nome!);
       }
     }
     return ListView.builder(
