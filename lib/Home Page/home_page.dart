@@ -1,17 +1,9 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:vapo_app/AppFont/fonts_app.dart';
-import 'package:vapo_app/Firebase/eventos.dart';
 import 'package:vapo_app/InfoPage/infopage.dart';
-import 'package:vapo_app/Save%20Events/save_events.dart';
-import 'package:vapo_app/Search%20Page/search_page.dart';
-import 'package:vapo_app/appbars/first_bar.dart';
 import '../Firebase/list_eventos.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:vapo_app/Save Events/saved_list.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);

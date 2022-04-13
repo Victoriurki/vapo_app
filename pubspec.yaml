@@ -57,10 +57,6 @@ google_sign_in: ^5.2.4
 firebase_core: ^1.14.0
 
 dev_dependencies:
-
-
-
-
   flutter_test:
     sdk: flutter
 
