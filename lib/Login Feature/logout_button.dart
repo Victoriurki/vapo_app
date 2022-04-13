@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:vapo_app/AppFont/fonts_app.dart';
@@ -18,6 +20,6 @@ class LogoutButton extends StatelessWidget {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: ((context) => const LoginPage())));
         }),
-        child: const Text("Logout"));
+        child:  Text("Logout", style: TextStyle(color: AppColors.gradientcolorA) ,));
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vapo_app/Home%20Page/curved.dart';
+import 'package:vapo_app/Home%20Page/home_page.dart';
+import 'package:vapo_app/Home%20Page/mainpage.dart';
 
 import 'AppTheme/app_theme.dart';
 import 'Login Feature/login_page.dart';
@@ -10,7 +13,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const LoginPage(),
+      home:  Curved(),
       theme: AppTheme.theme,
     );
   }
