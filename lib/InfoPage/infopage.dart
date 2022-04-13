@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:vapo_app/Firebase/list_eventos.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InfoPage extends StatelessWidget {
   final Event event;
@@ -15,9 +17,9 @@ class InfoPage extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/fillet.jpeg"),
+                image: NetworkImage(event.image!),
                 fit: BoxFit.fill,
               ),
             ),
@@ -64,7 +66,10 @@ class InfoPage extends StatelessWidget {
                   child: ListTile(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32)),
-                    leading: const Icon(Icons.access_alarm),
+                    leading: Icon(
+                      Icons.calendar_today,
+                      color: AppColors.gradientcolorB,
+                    ),
                     title: Column(
                       children: [
                         Row(
@@ -87,7 +92,7 @@ class InfoPage extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "Subtítulo 1",
+                              "",
                               style: GoogleFonts.concertOne(
                                 color: AppColors.subtitlecolors,
                                 textStyle: const TextStyle(
@@ -105,7 +110,17 @@ class InfoPage extends StatelessWidget {
                 Card(
                   elevation: 5,
                   child: ListTile(
-                    leading: const Icon(Icons.access_alarm),
+                    onTap: () {
+                      if (event.local! == "A definir")
+                        return null;
+                      else
+                        (launch(
+                            "https://www.google.com.br/maps/place/${event.endereco!}"));
+                    },
+                    leading: Icon(
+                      Icons.location_on,
+                      color: AppColors.gradientcolorB,
+                    ),
                     title: Column(
                       children: [
                         Row(
@@ -128,7 +143,7 @@ class InfoPage extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "Subtítulo 2",
+                              event.endereco!,
                               style: GoogleFonts.concertOne(
                                 color: AppColors.subtitlecolors,
                                 textStyle: const TextStyle(
@@ -146,13 +161,16 @@ class InfoPage extends StatelessWidget {
                 Card(
                   elevation: 5,
                   child: ListTile(
-                    leading: const Icon(Icons.access_alarm),
+                    leading: Icon(
+                      Icons.credit_card,
+                      color: AppColors.gradientcolorB,
+                    ),
                     title: Column(
                       children: [
                         Row(
                           children: [
                             Text(
-                              "Price",
+                              event.valor!,
                               style: GoogleFonts.concertOne(
                                 color: AppColors.titlecolor,
                                 textStyle: const TextStyle(
@@ -169,7 +187,7 @@ class InfoPage extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "Subtítulo 3",
+                              "",
                               style: GoogleFonts.concertOne(
                                 color: AppColors.subtitlecolors,
                                 textStyle: const TextStyle(
@@ -187,13 +205,19 @@ class InfoPage extends StatelessWidget {
                 Card(
                   elevation: 5,
                   child: ListTile(
-                    leading: const Icon(Icons.access_alarm),
+                    onTap: () {
+                      launch("https://www.instagram.com/${event.instagram!}/");
+                    },
+                    leading: Icon(
+                      FontAwesomeIcons.instagram,
+                      color: AppColors.gradientcolorB,
+                    ),
                     title: Column(
                       children: [
                         Row(
                           children: [
                             Text(
-                              event.instagram!,
+                              "@${event.instagram!}",
                               style: GoogleFonts.concertOne(
                                 color: AppColors.titlecolor,
                                 textStyle: const TextStyle(
@@ -210,7 +234,7 @@ class InfoPage extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              "Subtítulo 4",
+                              "",
                               style: GoogleFonts.concertOne(
                                 color: AppColors.subtitlecolors,
                                 textStyle: const TextStyle(

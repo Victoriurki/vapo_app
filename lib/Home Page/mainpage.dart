@@ -51,7 +51,7 @@ pageController.jumpToPage(index);
               label: '',
               backgroundColor: Colors.red),
            BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark),
+              icon: Icon(Icons.favorite_border),
               label: '',
               backgroundColor: Colors.blue)
         ],

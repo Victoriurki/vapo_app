@@ -11,6 +11,7 @@ import 'package:vapo_app/Search%20Page/search_page.dart';
 import 'package:vapo_app/appbars/first_bar.dart';
 import '../Firebase/list_eventos.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:vapo_app/Save Events/saved_list.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -45,7 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
               return Padding(
                 padding: padding,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          InfoPage(event: snapshot.data![index]),
+                    ),
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
@@ -172,10 +179,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemBuilder: (context, index) {
                             return ListTile(
                               onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => InfoPage(
-                                          event: snapshot.data![index]))),
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      InfoPage(event: snapshot.data![index]),
+                                ),
+                              ),
                               title: Column(
                                 children: <Widget>[
                                   Row(
@@ -263,7 +272,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ],
                                         ),
                                       ),
-                                      const Icon(Icons.bookmark_border)
+                                      IconButton(
+                                        onPressed: (() {}),
+                                        icon: Icon(Icons.favorite),
+                                      ),
                                     ],
                                   ),
                                   const Divider(),
