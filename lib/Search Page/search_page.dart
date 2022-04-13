@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vapo_app/Firebase/list_eventos.dart';
+import 'package:vapo_app/InfoPage/infopage.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -74,7 +75,7 @@ class CustomSearchDelegate extends SearchDelegate {
         var result = matchQuery[index];
         return ListTile(
           onTap: () {
-            
+          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(event: event)));
           },
           title: Text(result),
         );
