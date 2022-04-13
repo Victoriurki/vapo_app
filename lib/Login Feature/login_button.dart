@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vapo_app/AppFont/fonts_app.dart';
+import 'package:vapo_app/Home%20Page/curved.dart';
 import 'package:vapo_app/Home%20Page/home_page.dart';
 import 'package:vapo_app/Home%20Page/mainpage.dart';
 import 'package:vapo_app/Login%20Feature/gg_signin_controller.dart';
@@ -37,7 +38,7 @@ class LoginButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MainPage(),
+              builder: (context) => Curved(),
             ),
           );
         }
