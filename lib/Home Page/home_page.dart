@@ -1,126 +1,148 @@
-import 'package:vapo_app/AppColors/colors_app.dart';
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HomePage',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const MyHomePage(),
-    );
-  }
-}
+import 'package:vapo_app/AppFont/fonts_app.dart';
+import 'package:vapo_app/InfoPage/infopage.dart';
+import '../Firebase/list_eventos.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
-  
-
   @override
-  MyHomePageState createState() => MyHomePageState();  
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class MyHomePageState extends State<MyHomePage> {
-  List<String> items = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-    "Item 7",
-    "Item 8"
-  ];
+class _MyHomePageState extends State<MyHomePage> {
+  Stream<List<Event>> readUser() => FirebaseFirestore.instance
+      .collection('eventos')
+      .snapshots()
+      .map((snapshot) =>
+          snapshot.docs.map((doc) => Event.fromJson(doc.data())).toList());
 
   @override
   Widget build(BuildContext context) {
     final _width = MediaQuery.of(context).size.width;
-    final _height = MediaQuery.of(context).size.height*0.4;
+    final _height = MediaQuery.of(context).size.height * 0.4;
 
-    final headerList = ListView.builder(
-      itemBuilder: (context, index) {
-        EdgeInsets padding = index == 0
-            ? const EdgeInsets.only(
-                left: 20.0, right: 10.0, top: 4.0, bottom: 30.0)
-            : const EdgeInsets.only(
-                left: 10.0, right: 10.0, top: 4.0, bottom: 30.0);
+    final headerList = StreamBuilder<List<Event>>(
+        stream: readUser(),
+        builder: ((context, snapshot) {
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              EdgeInsets padding = index == 0
+                  ? const EdgeInsets.only(
+                      left: 20.0, right: 10.0, top: 4.0, bottom: 30.0)
+                  : const EdgeInsets.only(
+                      left: 10.0, right: 10.0, top: 4.0, bottom: 30.0);
 
-        return Padding(
-          padding: padding,
-          child: InkWell(
-            onTap: () {},
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: Colors.lightGreen,
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(3.0, 10.0),
-                      blurRadius: 15.0)
-                ],
-                image: const DecorationImage(
-                  image: ExactAssetImage(
-                      'images/fillet.jpeg'),
-                  fit: BoxFit.fitHeight,
+              return Padding(
+                padding: padding,
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          InfoPage(event: snapshot.data![index]),
+                    ),
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              offset: Offset(4, 4),
+                              blurRadius: 4)
+                        ],
+                        image: DecorationImage(
+                            image: NetworkImage(snapshot.data![index].image!),
+                            fit: BoxFit.fill)),
+                    //                                    height: 200.0,
+                    width: 300.0,
+                    child: Stack(
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(4, 4),
+                                        blurRadius: 4)
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10.0),
+                                      bottomRight: Radius.circular(10.0))),
+                              height: 70.0,
+                              width: 400,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      Text(
+                                        snapshot.data![index].nome!,
+                                        style: AppFont.titleapp,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const Icon(
+                                        Icons.calendar_today,
+                                        color: Color(0xff8E00FE),
+                                        size: 15,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        snapshot.data![index].data!,
+                                        style: AppFont.titleapp3,
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.location_on,
+                                        color: Color(0xff8E00FE),
+                                        size: 15,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        snapshot.data![index].local!,
+                                        style: AppFont.titleapp3,
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-              //                                    height: 200.0,
-              width: 200.0,
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                        decoration: const BoxDecoration(
-                            color: Color(0xFF273A48),
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(10.0),
-                                bottomRight: Radius.circular(10.0))),
-                        height: 30.0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
-                            Text(
-                              'Olá',
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        )),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-      scrollDirection: Axis.horizontal,
-      itemCount: items.length,
-    );
+              );
+            },
+            scrollDirection: Axis.horizontal,
+            itemCount: snapshot.data!.length,
+          );
+        }));
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home Page"),
-        elevation: 0.0,
-        backgroundColor: AppColors.appbarcolor,
-        actions: <Widget>[
-          IconButton(
-              icon: const Icon(
-                Icons.shopping_cart,
-                color: Colors.black,
-              ),
-              onPressed: () {})
-        ],
-      ),
+      appBar: const FirstBar(),
       backgroundColor: Colors.white,
       body: Stack(
         children: <Widget>[
@@ -140,75 +162,123 @@ class MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(color: Colors.white70),
                       )),
                 ),
-                SizedBox(height:_height, width: _width, child: headerList),
-                Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Column(
-                          children: <Widget>[
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  height: 72.0,
-                                  width: 72.0,
-                                  decoration: BoxDecoration(
-                                      color: Colors.lightGreen,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black.withAlpha(70),
-                                            offset: const Offset(2.0, 2.0),
-                                            blurRadius: 2.0)
-                                      ],
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(12.0)),
-                                      image: const DecorationImage(
-                                        image: ExactAssetImage(
-                                          'images/bailedamentira.jpeg',
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )),
+                SizedBox(height: _height, width: _width, child: headerList),
+                StreamBuilder<List<Event>>(
+                    stream: readUser(),
+                    builder: ((context, snapshot) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      InfoPage(event: snapshot.data![index]),
                                 ),
-                                const SizedBox(
-                                  width: 8.0,
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                              ),
+                              title: Column(
+                                children: <Widget>[
+                                  Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: const <Widget>[
-                                      Text(
-                                        'My item header',
-                                        style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.bold),
+                                    children: <Widget>[
+                                      Container(
+                                        height: 72.0,
+                                        width: 72.0,
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.black
+                                                      .withAlpha(70),
+                                                  offset:
+                                                      const Offset(2.0, 2.0),
+                                                  blurRadius: 2.0)
+                                            ],
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(12.0)),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                snapshot.data![index].image!,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            )),
                                       ),
-                                      Text(
-                                        'Item Subheader goes here\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
-                                        style: TextStyle(
-                                            fontSize: 12.0,
-                                            color: Colors.black54,
-                                            fontWeight: FontWeight.normal),
-                                      )
+                                      const SizedBox(
+                                        width: 8.0,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  snapshot.data![index].nome!,
+                                                  style: AppFont.titleapp2,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.calendar_today,
+                                                  color: Colors.grey,
+                                                  size: 15,
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  snapshot.data![index].data!,
+                                                  style: AppFont.subtitleapp,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.location_on,
+                                                  color: Colors.grey,
+                                                  size: 15,
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  snapshot.data![index].local!,
+                                                  style: AppFont.subtitleapp,
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: (() {}),
+                                        icon: Icon(Icons.favorite),
+                                      ),
                                     ],
                                   ),
-                                ),
-                                const Icon(
-                                  Icons.shopping_cart,
-                                  color: Color(0xFF273A48),
-                                )
-                              ],
-                            ),
-                            const Divider(),
-                          ],
+                                  const Divider(),
+                                ],
+                              ),
+                            );
+                          },
+                          itemCount: snapshot.data!.length,
                         ),
                       );
-                    },
-                  ),
-                ),
+                    }))
               ],
             ),
           ),
