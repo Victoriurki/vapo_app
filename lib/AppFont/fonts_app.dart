@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vapo_app/AppColors/colors_app.dart';
 
 class AppFont {
   static TextStyle vapo =
