@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:vapo_app/AppColors/colors_app.dart';
+import 'package:vapo_app/Firebase/eventos.dart';
 import 'package:vapo_app/Home%20Page/home_page.dart';
 import 'package:vapo_app/Save%20Events/save_events.dart';
 import 'package:vapo_app/Search%20Page/search_page.dart';

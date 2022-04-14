@@ -74,9 +74,7 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => InfoPage(event: event)));
-          },
+          onTap: () {},
           title: Text(result),
         );
       },
