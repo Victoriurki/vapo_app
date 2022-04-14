@@ -78,6 +78,7 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
+
           onTap: () {
             for (final event in events) {
               if (result == event.nome) {
@@ -93,6 +94,7 @@ class CustomSearchDelegate extends SearchDelegate {
             }
            
           },
+
           title: Text(result),
         );
       },

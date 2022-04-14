@@ -12,6 +12,7 @@ class Event {
   String? instagram;
   String? image;
   String? valor;
+  List<String>? favorites;
 
   Event({
     this.id,
@@ -23,6 +24,7 @@ class Event {
     this.instagram,
     this.image,
     this.valor,
+    this.favorites,
   });
 
   Map<String, dynamic> tojson() => {
@@ -36,6 +38,7 @@ class Event {
         'price': valor,      
         'image':image,
         'valor':valor,
+        'favorites':favorites,
 
       };
 
@@ -49,5 +52,6 @@ class Event {
         instagram: json['instagram'],
         image: json['image'],
         valor: json['valor'],
+        favorites: json['favorites'],
       );
 }
