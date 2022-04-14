@@ -92,17 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
+                                  Column(
+                            
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const Icon(
-                                        Icons.calendar_today,
-                                        color: Color(0xff8E00FE),
-                                        size: 15,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
                                       Text(
                                         snapshot.data![index].data!,
                                         style: AppFont.titleapp3,
