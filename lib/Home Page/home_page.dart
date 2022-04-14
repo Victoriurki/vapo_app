@@ -69,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) =>
                             InfoPage(event: snapshot.data![index]),
                       ),
-                    ),
+                    ),                 
+
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
@@ -94,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           color: Colors.grey,
                                           offset: Offset(4, 4),
                                           blurRadius: 4)
+
                                     ],
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(

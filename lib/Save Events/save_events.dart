@@ -26,6 +26,14 @@ class _SaveEventsState extends State<SaveEvents> {
             snapshot.docs.map((doc) => Event.fromJson(doc.data())).toList());
   }
 
+
+
+
+
+
+      
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,5 +101,6 @@ class _SaveEventsState extends State<SaveEvents> {
                 return const CircularProgressIndicator();
               }
             })));
+
   }
 }

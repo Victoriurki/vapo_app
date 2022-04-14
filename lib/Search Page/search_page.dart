@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:vapo_app/AppFont/fonts_app.dart';
 import 'package:vapo_app/Firebase/list_eventos.dart';
 import 'package:vapo_app/InfoPage/infopage.dart';
 
@@ -10,7 +11,9 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vapo'),
+        title:  Text('Vapo',
+        style: AppFont.vapo2,
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -63,6 +66,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
+    Event? selectedEvent;
 
     for (var event in events) {
       if (event.nome!.toLowerCase().contains(query.toLowerCase())) {
@@ -74,7 +78,23 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          onTap: () {},
+
+          onTap: () {
+            for (final event in events) {
+              if (result == event.nome) {
+                selectedEvent = event;
+              }
+          
+            }
+            if (selectedEvent != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => InfoPage(event: selectedEvent!)));
+            }
+           
+          },
+
           title: Text(result),
         );
       },
