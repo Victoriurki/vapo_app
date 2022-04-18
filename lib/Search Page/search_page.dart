@@ -11,8 +11,10 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Vapo',
-        style: AppFont.vapo2,
+        automaticallyImplyLeading: false,
+        title: Text(
+          'Vapo',
+          style: AppFont.vapo2.copyWith(fontSize: 28),
         ),
         actions: [
           IconButton(
@@ -78,13 +80,11 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-
           onTap: () {
             for (final event in events) {
               if (result == event.nome) {
                 selectedEvent = event;
               }
-          
             }
             if (selectedEvent != null) {
               Navigator.push(
@@ -92,9 +92,7 @@ class CustomSearchDelegate extends SearchDelegate {
                   MaterialPageRoute(
                       builder: (context) => InfoPage(event: selectedEvent!)));
             }
-           
           },
-
           title: Text(result),
         );
       },
@@ -104,6 +102,7 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
+    Event? selectedEvent;
     for (var event in events) {
       if (event.nome!.toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(event.nome!);
@@ -114,6 +113,19 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
+          onTap: () {
+            for (final event in events) {
+              if (result == event.nome) {
+                selectedEvent = event;
+              }
+            }
+            if (selectedEvent != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => InfoPage(event: selectedEvent!)));
+            }
+          },
           title: Text(result),
         );
       },
