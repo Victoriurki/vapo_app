@@ -18,4 +18,6 @@ class AppFont {
       GoogleFonts.concertOne(fontSize: 15, color: Colors.grey);
   static TextStyle datahome =
       GoogleFonts.concertOne(fontSize: 20, color: Colors.grey);
+  static TextStyle titlefavorite =
+      GoogleFonts.concertOne(fontSize: 24, color: const Color(0xff272D2D));
 }
