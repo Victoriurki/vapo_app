@@ -11,9 +11,10 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Vapo',
-          style: AppFont.vapo2,
+          style: AppFont.vapo2.copyWith(fontSize: 28),
         ),
         actions: [
           IconButton(

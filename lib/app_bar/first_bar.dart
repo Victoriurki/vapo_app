@@ -9,13 +9,14 @@ class FirstBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: AppColors.appbarcolor,
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             'Vapo',
-            style: AppFont.vapo2,
+            style: AppFont.vapo2.copyWith(fontSize: 28),
             textAlign: TextAlign.start,
           ),
         ],

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vapo_app/AppColors/colors_app.dart';
 import 'package:vapo_app/AppFont/fonts_app.dart';
 import 'package:vapo_app/InfoPage/infopage.dart';
 import '../Firebase/list_eventos.dart';
@@ -46,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: const CircularProgressIndicator(),
+              child: CircularProgressIndicator(),
             );
           }
 
@@ -69,8 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) =>
                             InfoPage(event: snapshot.data![index]),
                       ),
-                    ),                 
-
+                    ),
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
@@ -95,7 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                           color: Colors.grey,
                                           offset: Offset(4, 4),
                                           blurRadius: 4)
-
                                     ],
                                     color: Colors.white,
                                     borderRadius: BorderRadius.only(
@@ -106,53 +105,55 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Row(
-                                      children: [
-                                        Text(
-                                          snapshot.data![index].nome!,
-                                          style: AppFont.titleapp,
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    Row(
+                                    Column(children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            snapshot.data![index].nome!,
+                                            style: AppFont.titleapp,
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            color: Color(0xff8E00FE),
+                                            size: 15,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            snapshot.data![index].local!,
+                                            style: AppFont.titleapp3,
+                                          ),
+                                        ],
+                                      )
+                                    ]),
+                                    Column(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        const Icon(
-                                          Icons.calendar_today,
-                                          color: Color(0xff8E00FE),
-                                          size: 15,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          snapshot.data![index].data!,
-                                          style: AppFont.titleapp3,
-                                        ),
+                                        Stack(children: <Widget>[
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(snapshot.data![index].data!,
+                                                  style: AppFont.titleapp3
+                                                      .copyWith(
+                                                    fontSize: 20,
+                                                    color: AppColors
+                                                        .gradientcolorA,
+                                                  )),
+                                            ],
+                                          ),
+                                        ])
                                       ],
                                     ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.location_on,
-                                          color: Color(0xff8E00FE),
-                                          size: 15,
-                                        ),
-                                        const SizedBox(
-                                          width: 5,
-                                        ),
-                                        Text(
-                                          snapshot.data![index].local!,
-                                          style: AppFont.titleapp3,
-                                        ),
-                                      ],
-                                    )
                                   ],
                                 )),
                           )
@@ -171,6 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }));
 
     return Scaffold(
+      
       appBar: const FirstBar(),
       backgroundColor: Colors.white,
       body: Stack(

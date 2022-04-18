@@ -17,6 +17,6 @@ class LogoutButton extends StatelessWidget {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: ((context) => const LoginPage())));
         }),
-        child:  Text("Logout", style: TextStyle(color: AppColors.gradientcolorA) ,));
+        child: const  Text("Logout", style: TextStyle(color: Colors.white) ,));
   }
 }
