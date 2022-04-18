@@ -26,56 +26,48 @@ class _SaveEventsState extends State<SaveEvents> {
             snapshot.docs.map((doc) => Event.fromJson(doc.data())).toList());
   }
 
-
-
-
-
-
-      
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const FirstBar(),
-        body: StreamBuilder<List<Event>>(
-            stream: readUser(),
-            builder: ((context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active &&
-                  snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (_, index) {
-                      return Dismissible(
-                        key: Key(snapshot.data![index].nome!),
-                        onDismissed: (direction) {
-                          setState(() {
-                            final favoriteEvent = userCollection
-                                .doc(currentUser!.uid)
-                                .collection("favorite_events")
-                                .doc(snapshot.data![index].id);
-                            favoriteEvent.delete();
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Event Unsaved')));
-                        },
-                        child: ListTile(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  InfoPage(event: snapshot.data![index]),
-                            ),
-                          ),
-                          trailing: const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                          title: Text(
-                            snapshot.data![index].nome!,
-                            style: AppFont.titleapp,
-                          ),
-                          leading: Container(
+      appBar: const FirstBar(),
+      body: StreamBuilder<List<Event>>(
+        stream: readUser(),
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active &&
+              snapshot.hasData) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (_, index) {
+                return Dismissible(
+                  key: Key(snapshot.data![index].nome!),
+                  onDismissed: (direction) {
+                    setState(() {
+                      final favoriteEvent = userCollection
+                          .doc(currentUser!.uid)
+                          .collection("favorite_events")
+                          .doc(snapshot.data![index].id);
+                      favoriteEvent.delete();
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Event Unsaved')));
+                  },
+                  child: ListTile(                    
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            InfoPage(event: snapshot.data![index]),
+                      ),
+                    ),
+                    trailing: const Icon(
+                      Icons.favorite,
+                      color: Colors.red,
+                    ),
+                    title: Column(
+                      children: <Widget>[                      
+                        Row(children: <Widget>[
+                          Container(                            
                             height: 72.0,
                             width: 72.0,
                             decoration: BoxDecoration(
@@ -91,16 +83,37 @@ class _SaveEventsState extends State<SaveEvents> {
                                   image: NetworkImage(
                                     snapshot.data![index].image!,
                                   ),
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 )),
                           ),
-                        ),
-                      );
-                    });
-              } else {
-                return const CircularProgressIndicator();
-              }
-            })));
-
+                          const SizedBox(
+                            width: 8.0,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  snapshot.data![index].nome!,
+                                  style: AppFont.titlefavorite,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                          const Divider(),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          } else {
+            return const CircularProgressIndicator();
+          }
+        }),
+      ),
+    );
   }
 }
