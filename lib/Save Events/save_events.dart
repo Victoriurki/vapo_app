@@ -27,13 +27,6 @@ class _SaveEventsState extends State<SaveEvents> {
   }
 
 
-
-
-
-
-      
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
